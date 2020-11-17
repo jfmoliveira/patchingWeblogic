@@ -2,6 +2,6 @@
 
   patch_home: /home/oracle/Patches/
   oracle_user: oracle
-  folder_patch: /home/osboxes/ansible/roles/ansible-role-patching/patches/
+  folder_patch: /home/osboxes/ansible/ansible-role-patching/patches/
   patch_filename: p31957062_141100_Generic.zip
   stop_script: /home/oracle/scripts/shell/stop.sh

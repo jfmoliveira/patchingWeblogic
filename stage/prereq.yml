@@ -1,4 +1,4 @@
 ---
 - hosts: all
   roles:
-    - { role: /home/osboxes/ansible/roles/ansible-role-patching/roles/prereq }
+    - { role: /home/osboxes/ansible/ansible-role-patching/roles/prereq }
