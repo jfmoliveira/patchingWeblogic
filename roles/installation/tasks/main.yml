@@ -1,0 +1,39 @@
+---
+
+  - name: Extract PSU zip file
+    unarchive:
+      src: "{{patch_home}}{{ansible_date_time.date}}/{{patch_filename}}"
+      dest: "{{patch_home}}{{ansible_date_time.date}}"
+      remote_src: yes
+    become: true
+    become_method: sudo
+    become_user: oracle
+    tags: Extract
+
+  - name: Check OPatch Version
+    shell: opatch prereq CheckMinimumOPatchVersion -ph {{patch_home}}{{ansible_date_time.date}}/{{patch_number}}
+    register: opatchVersion
+    tags: Check
+
+  - debug: var=opatchVersion
+    tags: Debug
+
+  - name: Check conflit patches
+    shell: opatch prereq CheckConflictAgainstOHWithDetail -ph {{patch_home}}{{ansible_date_time.date}}/{{patch_number}}
+    register: conflitPatches
+    tags: Check
+
+  - debug: var=conflitPatches
+    tags: Debug
+
+  - name: Install PSU
+    shell: opatch apply -force -silent {{patch_home}}{{ansible_date_time.date}}/{{patch_number}}
+    register: applyPatch
+    tags: apply
+
+  - debug: var=applyPatch
+    tags: DebugApply
+
+  - name: Start Managed Server
+    shell: "{{start_script}}"
+    tags: startms

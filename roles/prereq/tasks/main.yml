@@ -1,0 +1,28 @@
+---
+
+- name: Create patch directory
+  file:
+    path: "{{patch_home}}{{ansible_date_time.date}}"
+    state: directory
+    owner: "{{ oracle_user }}"
+    group: "{{ oracle_user }}"
+  become: true
+  become_method: sudo
+  become_user: oracle
+  tags: prereq
+
+
+- name: Copy psu file
+  copy:
+    src: "{{folder_patch}}{{patch_filename}}"
+    dest: "{{patch_home}}{{ansible_date_time.date}}"
+    owner: "{{ oracle_user }}"
+    mode: 0755
+  become: true
+  become_method: sudo
+  become_user: oracle
+  tags: prereq
+
+- name: Stop Managed Server
+  shell: "{{stop_script}}"
+  tags: stopms

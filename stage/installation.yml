@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles:
+    - { role: /home/osboxes/ansible/roles/ansible-role-patching/roles/installation }
