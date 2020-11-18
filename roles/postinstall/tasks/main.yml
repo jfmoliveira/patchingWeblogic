@@ -1,0 +1,5 @@
+---
+
+  - name: Start Managed Server
+    shell: "{{start_script}}"
+    tags: startms

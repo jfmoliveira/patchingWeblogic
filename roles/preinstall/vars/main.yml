@@ -1,0 +1,7 @@
+---
+
+
+  patch_home: /home/oracle/Patches/
+  patch_number: 31957062
+  oracle_user: oracle
+  stop_script: /home/oracle/scripts/shell/stop.sh

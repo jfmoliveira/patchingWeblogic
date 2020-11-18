@@ -1,0 +1,5 @@
+---
+
+  patch_home: /home/oracle/Patches/
+  oracle_user: oracle
+  patch_filename: p31957062_141100_Generic.zip

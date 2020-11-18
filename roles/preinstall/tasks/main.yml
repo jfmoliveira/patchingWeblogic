@@ -1,0 +1,21 @@
+---
+
+  - name: Check OPatch Version
+    shell: opatch prereq CheckMinimumOPatchVersion -ph {{patch_home}}{{ansible_date_time.date}}/{{patch_number}}
+    register: opatchVersion
+    tags: Check
+
+  - debug: var=opatchVersion
+    tags: Check
+
+  - name: Check conflit patches
+    shell: opatch prereq CheckConflictAgainstOHWithDetail -ph {{patch_home}}{{ansible_date_time.date}}/{{patch_number}}
+    register: conflitPatches
+    tags: Check
+
+  - debug: var=conflitPatches
+    tags: Check
+
+  - name: Stop Managed Server
+    shell: "{{stop_script}}"
+    tags: stopms

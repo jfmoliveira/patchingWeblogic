@@ -6,9 +6,6 @@
     state: directory
     owner: "{{ oracle_user }}"
     group: "{{ oracle_user }}"
-  become: true
-  become_method: sudo
-  become_user: oracle
   tags: prereq
 
 
@@ -18,11 +15,11 @@
     dest: "{{patch_home}}{{ansible_date_time.date}}"
     owner: "{{ oracle_user }}"
     mode: 0755
-  become: true
-  become_method: sudo
-  become_user: oracle
   tags: prereq
 
-- name: Stop Managed Server
-  shell: "{{stop_script}}"
-  tags: stopms
+- name: Extract PSU zip file
+  unarchive:
+    src: "{{patch_home}}{{ansible_date_time.date}}/{{patch_filename}}"
+    dest: "{{patch_home}}{{ansible_date_time.date}}"
+    remote_src: yes
+  tags: Extract
